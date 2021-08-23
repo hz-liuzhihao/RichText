@@ -2,6 +2,10 @@ import { StyleBuild } from './StyleBuild';
 import { BaseBuild, UndoItem } from '../flow/UndoManager';
 export interface TextItemMeta {
   styleIndex: number;
+  /**
+   * 标签类型,一般默认为span
+   */
+  type: string;
 }
 
 /**

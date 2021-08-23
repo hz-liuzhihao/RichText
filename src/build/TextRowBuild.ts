@@ -3,6 +3,11 @@ import { BaseBuild, BaseBuildArgs, UndoItem } from '../flow/UndoManager';
 
 export interface TextRowMeta {
   textItems: TextItemMeta[];
+
+  /**
+   * 行级标签名,一般默认为p
+   */
+  type: string;
 }
 
 /**
