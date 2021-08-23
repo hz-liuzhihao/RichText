@@ -6,6 +6,11 @@ export interface TextItemMeta {
    * 标签类型,一般默认为span
    */
   type: string;
+
+  /**
+   * item下面还有元素
+   */
+  items: TextItemMeta[];
 }
 
 /**

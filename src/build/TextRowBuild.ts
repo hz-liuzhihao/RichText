@@ -2,7 +2,10 @@ import { TextItemBuild, TextItemMeta } from './TextItemBuild';
 import { BaseBuild, BaseBuildArgs, UndoItem } from '../flow/UndoManager';
 
 export interface TextRowMeta {
-  textItems: TextItemMeta[];
+  /**
+   * 行中的所有item
+   */
+  items: TextItemMeta[];
 
   /**
    * 行级标签名,一般默认为p
@@ -13,7 +16,7 @@ export interface TextRowMeta {
 /**
  * 文本行数据层
  */
-class TextRowBuild extends BaseBuild<TextRowMeta> {
+export class TextRowBuild extends BaseBuild<TextRowMeta> {
 
   private textItems: TextItemBuild[];
 
