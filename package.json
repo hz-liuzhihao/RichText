@@ -39,6 +39,8 @@
   },
   "homepage": "https://gitee.com/lzhblog/lzhtscomp.git",
   "dependencies": {
+    "@types/lodash": "^4.14.172",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "pre-commit": "^1.2.2",
