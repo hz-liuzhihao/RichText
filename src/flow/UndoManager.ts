@@ -17,7 +17,7 @@ export interface IWorkBench {
 /**
  * undomanage参数
  */
- export interface UndoManageArgs {
+export interface UndoManageArgs {
   workbench: IWorkBench;
 }
 
@@ -141,7 +141,7 @@ export abstract class BaseBuild<T> {
 /**
  * 用户行为集合
  */
- export interface UndoItem {
+export interface UndoItem {
   c: BaseBuild<any>,
   /**
    * 操作的行为
@@ -199,14 +199,66 @@ export interface UndoCompEditor {
 /**
  * 用户行为参数
  */
- export interface UndoManageArgs {
+export interface UndoManageArgs {
   workbench: IWorkBench;
+}
+
+export interface IUndoManage {
+  /**
+   * 处理redo操作
+   */
+  redo(): void;
+
+  /**
+   * 处理undo操作
+   */
+  undo(): void;
+
+  /**
+   * 开始更新
+   */
+  beginUpdate(): void;
+
+  /**
+   * 结束更新
+   */
+  endUpdate(): void;
+
+  /**
+   * 存储新的undoItem
+   * @param undoItem 
+   */
+  storeUndoItem(undoItem: UndoItem): void;
+
+  /**
+   * 是否可以undo
+   * @returns 
+   */
+  canUndo(): boolean;
+
+  /**
+   * 是否可以redo
+   * @returns 
+   */
+  canRedo(): boolean;
+
+  /**
+   * 是否可以执行保存操作
+   * @returns 
+   */
+  canSave(): boolean;
+
+  /**
+   * 设置工作台
+   * @param workbench 
+   */
+  setWorkBench(workbench: IWorkBench): void;
 }
 
 /**
  * 用户行为管理器
  */
-export class UndoManage {
+export class UndoManage implements IUndoManage {
 
   public isUndo: boolean = false;
 
@@ -232,9 +284,6 @@ export class UndoManage {
     this.saveCount = 0;
   }
 
-  /**
-   * 处理redo操作
-   */
   public redo(): void {
     if (!this.canRedo()) {
       return;
@@ -253,9 +302,6 @@ export class UndoManage {
     this.isRedo = false;
   }
 
-  /**
-   * 处理undo操作
-   */
   public undo(): void {
     if (!this.canUndo()) {
       return;
@@ -274,16 +320,10 @@ export class UndoManage {
     this.isUndo = false;
   }
 
-  /**
-   * 开始更新
-   */
   public beginUpdate(): void {
     this.count++;
   }
 
-  /**
-   * 结束更新
-   */
   public endUpdate(): void {
     this.count--;
     if (this.count == 0) {
@@ -301,10 +341,6 @@ export class UndoManage {
     }
   }
 
-  /**
-   * 存储新的undoItem
-   * @param undoItem 
-   */
   public storeUndoItem(undoItem: UndoItem) {
     if (this.isRedo || this.isUndo) {
       return;
@@ -320,28 +356,20 @@ export class UndoManage {
     }
   }
 
-  /**
-   * 是否可以undo
-   * @returns 
-   */
   public canUndo() {
     return this.undoItems.length > 0;
   }
 
-  /**
-   * 是否可以redo
-   * @returns 
-   */
   public canRedo() {
     return this.redoItems.length > 0;
   }
 
-  /**
-   * 是否可以执行保存操作
-   * @returns 
-   */
   public canSave() {
     return this.saveCount != 0;
+  }
+
+  public setWorkBench(workbench: IWorkBench) {
+    this.workbench = workbench;
   }
 }
 
