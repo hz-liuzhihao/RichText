@@ -1,4 +1,5 @@
 import { BaseBuild, UndoItem } from '../flow/UndoManager';
+import { RichTextBuild } from './RichTextBuild';
 export interface StyleMeta {
   /**
    * 字体颜色
@@ -69,10 +70,14 @@ export interface StyleMeta {
 
 export interface StyleBuildArgs {
   metaInfo: StyleMeta;
+
+  richTextBuild: RichTextBuild;
 }
 
 export class StyleBuild extends BaseBuild<StyleMeta> {
   protected metaInfo: StyleMeta;
+
+  private richTextBuild: RichTextBuild;
 
   private builds: BaseBuild<any>[];
 
@@ -80,7 +85,7 @@ export class StyleBuild extends BaseBuild<StyleMeta> {
    * 添加关联单元格
    * @param build 
    */
-  public addCell(build: BaseBuild<any>) {
+  public addBuild(build: BaseBuild<any>) {
     this.builds.push(build);
   }
 
@@ -106,11 +111,12 @@ export class StyleBuild extends BaseBuild<StyleMeta> {
   }
 
   protected initData(args: StyleBuildArgs) {
+    this.richTextBuild = args.richTextBuild;
     this.builds = [];
   }
 
 
   protected initMeta() {
-    throw new Error('Method not implemented.');
+    const metaInfo = this.metaInfo;
   }
 }

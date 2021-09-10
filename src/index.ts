@@ -1,4 +1,4 @@
-import { RichTextBuild, RichTextMeta } from './build/RichTextBuild';
+import { RichTextBuild, RichTextBuildArgs } from './build/RichTextBuild';
 import { RichTextEditor } from './editor/RichTextEditor';
 import { IWorkBench, UndoItem, UndoManage } from './flow/UndoManager';
 
@@ -61,7 +61,7 @@ class Workbench implements IWorkBench {
 export interface RichTextConfig {
   dom: HTMLDivElement;
 
-  metaInfo: RichTextMeta;
+  metaInfo: RichTextBuildArgs;
 
   undoManage: UndoManage;
 }

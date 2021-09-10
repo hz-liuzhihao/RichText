@@ -5,7 +5,9 @@ export interface BaseEditorArgs {
 
 }
 
-export default abstract class BaseEditor {
+export default abstract class BaseEditor<T> {
+
+  protected build: BaseBuild<T>;
 
   protected workbench: IWorkBench;
 
@@ -14,4 +16,8 @@ export default abstract class BaseEditor {
   protected parentDom: HTMLElement;
 
   protected mainClassName: string;
+
+  public constructor(args: BaseEditorArgs) {
+    this.build = args.build;
+  }
 }

@@ -1,16 +1,20 @@
 import { StyleBuild } from './StyleBuild';
-import { BaseBuild, UndoItem } from '../flow/UndoManager';
+import { BaseBuild, UndoItem, BaseBuildArgs } from '../flow/UndoManager';
 export interface TextItemMeta {
   styleIndex: number;
   /**
-   * 标签类型,一般默认为span
+   * 标签类型,一般默认为span,当为text时是不需要进行包裹的
    */
   type: string;
 
   /**
    * item下面还有元素
    */
-  items: TextItemMeta[];
+  children: TextItemMeta[];
+}
+
+export interface TextItemBuildArgs extends BaseBuildArgs {
+  a: any;
 }
 
 /**

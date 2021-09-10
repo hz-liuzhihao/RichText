@@ -13,6 +13,10 @@ export interface TextRowMeta {
   type: string;
 }
 
+export interface TextRowBuildArgs extends BaseBuildArgs {
+  b: any;
+}
+
 /**
  * 文本行数据层
  */

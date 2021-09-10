@@ -257,6 +257,7 @@ export interface IUndoManage {
 
 /**
  * 用户行为管理器
+ * undoItem在undo堆栈中的信息永远不会修改,外界需要根据isundo和isredo获取对应信息
  */
 export class UndoManage implements IUndoManage {
 
