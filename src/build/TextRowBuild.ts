@@ -8,13 +8,13 @@ export interface TextRowMeta {
   items: TextItemMeta[];
 
   /**
-   * 行级标签名,一般默认为p
+   * 行级样式
    */
-  type: string;
+  styleIndex?: number;
 }
 
+// tslint:disable-next-line: no-empty-interface
 export interface TextRowBuildArgs extends BaseBuildArgs {
-  b: any;
 }
 
 /**
@@ -24,13 +24,24 @@ export class TextRowBuild extends BaseBuild<TextRowMeta> {
 
   private textItems: TextItemBuild[];
 
+  public constructor(args: TextRowBuildArgs) {
+    super(args);
+  }
+
   public restoreUndoItem(undoItem: UndoItem): void {
     throw new Error('Method not implemented.');
   }
   protected initData(args: BaseBuildArgs): void {
-    throw new Error('Method not implemented.');
+    this.textItems = [];
   }
   protected initMeta(): void {
-    throw new Error('Method not implemented.');
+    const meta = this.metaInfo;
+    if (meta.items && meta.items.length) {
+      meta.items.forEach(item => {
+        this.textItems.push(new TextItemBuild({
+          metaInfo: item
+        }));
+      })
+    }
   }
 }

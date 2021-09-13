@@ -7,4 +7,13 @@ export class TextRowEditor extends BaseEditor<TextRowMeta> {
 
   private textItemEditors: TextItemEditor[];
 
+  public render(): void {
+    throw new Error('Method not implemented.');
+  }
+  protected initDom(): void {
+    throw new Error('Method not implemented.');
+  }
+  protected renderUndoItem(): void {
+    throw new Error('Method not implemented.');
+  }
 }

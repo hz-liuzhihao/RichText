@@ -45,6 +45,9 @@ export class RichTextBuild extends BaseBuild<RichTextMeta> {
     meta.styles.forEach(style => this.styleBuilds.push(new StyleBuild({
       metaInfo: style
     })));
+    meta.textRows.forEach(textRow => this.textRowBuilds.push(new TextRowBuild({
+      metaInfo: textRow
+    })));
   }
 
 }

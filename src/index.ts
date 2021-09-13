@@ -1,4 +1,4 @@
-import { RichTextBuild, RichTextBuildArgs } from './build/RichTextBuild';
+import { RichTextBuild, RichTextMeta } from './build/RichTextBuild';
 import { RichTextEditor } from './editor/RichTextEditor';
 import { IWorkBench, UndoItem, UndoManage } from './flow/UndoManager';
 
@@ -32,12 +32,18 @@ class Workbench implements IWorkBench {
     return this.undoManage;
   }
 
+  public load() {
+    this.editor.requestRender();
+  }
+
   /**
    * 初始化数据层
    * @param args 
    */
   private initBuild(args: WorkbenchArgs) {
-    throw new Error('Method not implemented.');
+    this.build = new RichTextBuild({
+      metaInfo: args.config.metaInfo
+    });
   }
 
   /**
@@ -45,7 +51,10 @@ class Workbench implements IWorkBench {
    * @param args 
    */
   private initEditor(args: WorkbenchArgs) {
-    throw new Error('Method not implemented.');
+    this.editor = new RichTextEditor({
+      build: this.build,
+      workbench: this,
+    });
   }
 
   private initManage(args: WorkbenchArgs) {
@@ -61,9 +70,9 @@ class Workbench implements IWorkBench {
 export interface RichTextConfig {
   dom: HTMLDivElement;
 
-  metaInfo: RichTextBuildArgs;
+  metaInfo: RichTextMeta;
 
-  undoManage: UndoManage;
+  undoManage?: UndoManage;
 }
 
 /**
@@ -71,11 +80,20 @@ export interface RichTextConfig {
  */
 export class RichText {
 
-  private dom: HTMLDivElement;
-
-
+  private workbench: Workbench;
 
   public constructor(config: RichTextConfig) {
-    this.dom = config.dom;
+    this.workbench = new Workbench({
+      config
+    });
+    (window as any).workbench = this.workbench;
+  }
+
+  public load() {
+    this.workbench.load();
+  }
+
+  public getWorkbench() {
+    return this.workbench;
   }
 }

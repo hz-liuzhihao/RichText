@@ -14,4 +14,15 @@ export interface RichTextEditorArgs extends BaseEditorArgs {
 export class RichTextEditor extends BaseEditor<RichTextMeta> {
 
   private textRowEditors: TextRowEditor[];
+
+  public render(): void {
+    throw new Error('Method not implemented.');
+  }
+  protected initDom(): void {
+    throw new Error('Method not implemented.');
+  }
+  protected renderUndoItem(): void {
+    throw new Error('Method not implemented.');
+  }
+
 }

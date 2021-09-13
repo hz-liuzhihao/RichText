@@ -19,7 +19,7 @@ declare module '*.less' {
 }
 
 interface Element {
-    __comp__: any;
+    __build__: any;
 }
 
 interface JSONObject {
