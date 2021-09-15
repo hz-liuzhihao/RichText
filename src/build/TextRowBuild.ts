@@ -31,9 +31,18 @@ export class TextRowBuild extends BaseBuild<TextRowMeta> {
   public restoreUndoItem(undoItem: UndoItem): void {
     throw new Error('Method not implemented.');
   }
+
+  /**
+   * 获取一行所有元素
+   */
+  public getTextItemBuild() {
+    return this.textItems;
+  }
+
   protected initData(args: BaseBuildArgs): void {
     this.textItems = [];
   }
+
   protected initMeta(): void {
     const meta = this.metaInfo;
     if (meta.items && meta.items.length) {

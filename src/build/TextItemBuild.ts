@@ -45,6 +45,14 @@ export class TextItemBuild extends BaseBuild<TextItemMeta> {
     this.textItems = [];
   }
 
+  /**
+   * 获取子元素列表
+   * @returns 
+   */
+  public getChildren() {
+    return this.textItems;
+  }
+
   protected initMeta() {
     const meta = this.metaInfo;
     if (meta.children && meta.children.length) {

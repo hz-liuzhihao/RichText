@@ -13,13 +13,29 @@ export interface RichTextEditorArgs extends BaseEditorArgs {
  */
 export class RichTextEditor extends BaseEditor<RichTextMeta> {
 
+  protected build: RichTextBuild;
+
   private textRowEditors: TextRowEditor[];
 
   public render(): void {
-    throw new Error('Method not implemented.');
+    this.textRowEditors.forEach(item => item.render());
   }
+
+  public initData(args: RichTextEditorArgs) {
+    super.initData(args);
+    this.textRowEditors = [];
+  }
+
   protected initDom(): void {
-    throw new Error('Method not implemented.');
+    const textRowBuilds = this.build.getTextRowBuilds();
+    this.textRowEditors = textRowBuilds.map(build => {
+      const textRowEditor = new TextRowEditor({
+        build,
+        domParent: this.mainDom,
+        workbench: this.workbench
+      });
+      return textRowEditor;
+    });
   }
   protected renderUndoItem(): void {
     throw new Error('Method not implemented.');

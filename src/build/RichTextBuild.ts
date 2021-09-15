@@ -32,6 +32,13 @@ export class RichTextBuild extends BaseBuild<RichTextMeta> {
    */
   private textRowBuilds: TextRowBuild[];
 
+  /**
+   * 获取文本行数据层
+   */
+   public getTextRowBuilds() {
+    return this.textRowBuilds;
+  }
+
   public restoreUndoItem(undoItem: UndoItem): void {
     throw new Error("Method not implemented.");
   }
@@ -49,5 +56,4 @@ export class RichTextBuild extends BaseBuild<RichTextMeta> {
       metaInfo: textRow
     })));
   }
-
 }
