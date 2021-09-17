@@ -1,6 +1,9 @@
 import { RichTextBuild, RichTextMeta } from './build/RichTextBuild';
 import { RichTextEditor } from './editor/RichTextEditor';
-import { IWorkBench, UndoItem, UndoManage } from './flow/UndoManager';
+import { IWorkBench, UndoItem, UndoManage, BaseBuild } from './flow/UndoManager';
+import { PluginBuild } from './build/PluginBuild';
+import { PluginEditor } from './editor/PluginEditor';
+import BaseEditor from './editor/BaseEditor';
 
 interface WorkbenchArgs {
   config: RichTextConfig;
@@ -67,10 +70,24 @@ class Workbench implements IWorkBench {
     });
   }
 }
+
+/**
+ * M元数据类型
+ * T数据层
+ * S编辑器层
+ */
+interface RichTextPlugin<M, T extends PluginBuild<M>, S extends PluginEditor<M>> {
+  [key: string]: {
+    build: T;
+    editor: S;
+  }
+}
 export interface RichTextConfig {
   dom: HTMLDivElement;
 
   metaInfo: RichTextMeta;
+
+  plugins: RichTextPlugin<JSONObject, BaseBuild<JSONObject>, BaseEditor<JSONObject>>[];
 
   undoManage?: UndoManage;
 }
