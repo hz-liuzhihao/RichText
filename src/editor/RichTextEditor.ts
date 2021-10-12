@@ -24,6 +24,7 @@ export class RichTextEditor extends BaseEditor<RichTextMeta> {
   public initData(args: RichTextEditorArgs) {
     super.initData(args);
     this.textRowEditors = [];
+    this.mainClassName = 'richtexteditor';
   }
 
   protected initDom(): void {

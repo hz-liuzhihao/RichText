@@ -118,28 +118,6 @@ export function repeatFill<T>(func: () => T, count: number): T[] {
 }
 
 /**
- * 根据dom找到组件
- * @param dom 
- * @param group 
- */
-export function findCompByDom<T>(dom: HTMLElement, group?: string): T {
-  if (!dom || dom.tagName === 'BODY') {
-    return null;
-  }
-  const comp = dom.__comp__;
-  if (comp && group) {
-    if (comp.getGroup && typeof comp.getGroup === 'function') {
-      if (comp.getGroup() === group) {
-        return comp;
-      }
-    }
-  } else if (comp) {
-    return comp;
-  }
-  return findCompByDom(dom.parentElement, group);
-}
-
-/**
  * 获取鼠标所在方位
  * @param dom 
  * @param event 

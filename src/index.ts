@@ -87,7 +87,7 @@ export interface RichTextConfig {
 
   metaInfo: RichTextMeta;
 
-  plugins: RichTextPlugin<JSONObject, BaseBuild<JSONObject>, BaseEditor<JSONObject>>[];
+  plugins?: RichTextPlugin<JSONObject, BaseBuild<JSONObject>, BaseEditor<JSONObject>>[];
 
   undoManage?: UndoManage;
 }

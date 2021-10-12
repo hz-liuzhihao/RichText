@@ -15,6 +15,7 @@ export class TextRowEditor extends BaseEditor<TextRowMeta> {
   protected initData(args: BaseEditorArgs) {
     super.initData(args);
     this.textItemEditors = [];
+    this.mainClassName = 'textroweditor';
   }
 
   protected initDom(): void {

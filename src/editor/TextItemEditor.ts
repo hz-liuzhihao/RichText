@@ -14,6 +14,7 @@ export class TextItemEditor extends BaseEditor<TextItemMeta> {
   protected initData(args: BaseEditorArgs) {
     super.initData(args);
     this.children = [];
+    this.mainClassName = 'textitemeditor';
   }
 
   protected initMainDom() {
